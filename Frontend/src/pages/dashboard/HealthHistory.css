@@ -1,0 +1,94 @@
+.health-history-page {
+  --hh-ink: #18332e;
+  --hh-muted: #647873;
+  --hh-green: #147d64;
+  --hh-border: #e1ebe6;
+  --hh-surface: #fff;
+  --hh-wash: #f4f9f6;
+  min-width: 0;
+  min-height: 100vh;
+  padding: clamp(26px, 4vw, 54px);
+  color: var(--hh-ink);
+  background: #f7faf8;
+}
+
+.health-history-header,
+.health-history-list-heading,
+.health-history-entry-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.health-history-header h1 { margin: 0; font-size: clamp(2rem, 4vw, 2.7rem); letter-spacing: -0.04em; }
+.health-history-header > div > p:last-child { margin: 9px 0 0; color: var(--hh-muted); }
+.health-history-eyebrow { margin: 0 0 8px; color: var(--hh-green); font-size: .74rem; font-weight: 800; letter-spacing: .12em; }
+
+.health-history-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; margin: 30px 0; }
+.health-history-stat { display: flex; align-items: center; gap: 15px; padding: 20px; border: 1px solid var(--hh-border); border-radius: 15px; background: var(--hh-surface); }
+.health-history-stat > span,.health-history-entry-icon { display: grid; width: 46px; height: 46px; flex: 0 0 auto; place-items: center; border-radius: 13px; color: var(--hh-green); background: #e8f6ee; font-size: 1.35rem; }
+.health-history-stat strong { font-size: 1.6rem; }
+.health-history-stat p { margin: 2px 0 0; color: var(--hh-muted); font-size: .9rem; }
+
+.health-history-list { padding: clamp(19px, 3vw, 30px); border: 1px solid var(--hh-border); border-radius: 17px; background: var(--hh-surface); box-shadow: 0 12px 30px rgb(24 51 46 / 4%); }
+.health-history-list-heading h2 { margin: 0; font-size: 1.4rem; }
+.health-history-search { display: flex; align-items: center; gap: 9px; width: min(300px, 45%); padding: 0 12px; border: 1px solid var(--hh-border); border-radius: 10px; color: var(--hh-muted); background: var(--hh-surface); }
+.health-history-search input { width: 100%; min-width: 0; height: 42px; border: 0; outline: 0; color: var(--hh-ink); background: transparent; }
+.health-history-filters { display: flex; gap: 8px; margin: 22px 0 10px; }
+.health-history-filters button,.health-history-error button { padding: 9px 14px; border: 1px solid var(--hh-border); border-radius: 999px; color: var(--hh-muted); background: transparent; cursor: pointer; }
+.health-history-filters button.selected { border-color: var(--hh-green); color: #fff; background: var(--hh-green); }
+.health-history-entries { display: grid; }
+.health-history-entry { display: flex; align-items: center; gap: 15px; padding: 18px 2px; border-top: 1px solid var(--hh-border); }
+.health-history-entry-copy { min-width: 0; flex: 1; }
+.health-history-entry-title { justify-content: flex-start; flex-wrap: wrap; }
+.health-history-entry h3 { margin: 0; font-size: 1rem; }
+.health-history-entry-copy > p { margin: 6px 0; color: var(--hh-muted); overflow-wrap: anywhere; }
+.health-history-entry-meta,.health-history-entry time { color: var(--hh-muted); font-size: .83rem; }
+.health-history-entry time { flex: 0 0 auto; }
+.health-history-entry-current { flex: 0 0 auto; color: var(--hh-green); font-size: .83rem; font-weight: 700; }
+.health-history-entry-actions { display: flex; flex: 0 0 auto; gap: 8px; }
+.health-history-entry-actions button { padding: 8px 10px; border: 1px solid var(--hh-border); border-radius: 8px; color: var(--hh-green); background: var(--hh-surface); cursor: pointer; font: inherit; font-size: .82rem; font-weight: 700; }
+.health-history-entry-actions button:hover { border-color: var(--hh-green); background: var(--hh-wash); }
+.health-history-entry-actions button:disabled { cursor: wait; opacity: .65; }
+.health-history-entry-actions button.delete { color: #a33d3d; }
+.health-history-action-message { margin: 14px 0 6px; color: var(--hh-green); font-size: .9rem; }
+.health-history-print-sheet { display: none; }
+.health-history-tag { padding: 4px 8px; border-radius: 999px; color: #276c56; background: #edf7f1; font-size: .72rem; font-weight: 700; }
+.health-history-tag.medicines { color: #8b650e; background: #fff6dc; }
+.health-history-state { padding: 30px 8px; color: var(--hh-muted); text-align: center; }
+.health-history-error { display: flex; align-items: center; justify-content: center; gap: 12px; color: #a33d3d; }
+.health-history-error p { margin: 0; }
+.health-history-empty { padding: 48px 15px 40px; color: var(--hh-muted); text-align: center; }
+.health-history-empty > span { color: var(--hh-green); font-size: 2rem; }
+.health-history-empty h3 { margin: 12px 0 7px; color: var(--hh-ink); }
+.health-history-empty p { margin: 0 0 16px; }
+.health-history-empty a { color: var(--hh-green); font-weight: 700; text-decoration: none; }
+.health-history-note { margin: 18px 2px 0; color: var(--hh-muted); font-size: .83rem; line-height: 1.55; }
+.health-history-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+:root[data-theme="dark"] .health-history-page { --hh-ink: #e5f1eb; --hh-muted: #a6bbb1; --hh-green: #55c4a0; --hh-border: #30483f; --hh-surface: #172722; --hh-wash: #12201b; background: #0d1713; }
+:root[data-theme="dark"] .health-history-stat > span,:root[data-theme="dark"] .health-history-entry-icon { background: #203a30; }
+:root[data-theme="dark"] .health-history-tag { color: #b9ead3; background: #193329; }
+:root[data-theme="dark"] .health-history-tag.medicines { color: #f3d98d; background: #3c3420; }
+
+@media (max-width: 760px) {
+  .health-history-page { padding: 25px 5%; }
+  .health-history-summary { grid-template-columns: 1fr; }
+  .health-history-list-heading { align-items: stretch; flex-direction: column; }
+  .health-history-search { width: 100%; }
+  .health-history-entry { align-items: flex-start; flex-wrap: wrap; }
+  .health-history-entry time { width: 100%; padding-left: 61px; }
+  .health-history-entry-actions { width: 100%; padding-left: 61px; }
+}
+
+@media print {
+  @page { margin: 18mm; }
+  body * { visibility: hidden !important; }
+  .health-history-print-sheet,
+  .health-history-print-sheet * { visibility: visible !important; }
+  .health-history-print-sheet { display: block !important; position: absolute; inset: 0; width: 100%; color: #18231f !important; background: #fff !important; font: 12pt/1.6 Arial, sans-serif; }
+  .health-history-print-sheet h1 { margin: 0 0 24px; font-size: 24pt; }
+  .health-history-print-sheet p { margin: 12px 0; }
+  .health-history-print-disclaimer { margin-top: 30px !important; padding: 12px; border: 1px solid #777; }
+}

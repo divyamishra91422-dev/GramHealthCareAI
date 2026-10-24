@@ -1,0 +1,430 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #18332e;
+  background: #f6faf8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  --color-ink: #18332e;
+  --color-muted: #647873;
+  --color-primary: #147d64;
+  --color-primary-dark: #0e604d;
+  --color-border: #e1ebe6;
+  --color-surface: #ffffff;
+  --color-wash: #f1f8f5;
+  --shadow-card: 0 18px 44px rgb(24 51 46 / 7%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--color-ink);
+  background: #fff;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgb(20 125 100 / 35%);
+  outline-offset: 3px;
+}
+
+::selection {
+  color: #fff;
+  background: var(--color-primary);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #e5f1eb;
+  --color-muted: #a6bbb1;
+  --color-primary: #55c4a0;
+  --color-primary-dark: #35a783;
+  --color-border: #30483f;
+  --color-surface: #172722;
+  --color-wash: #12201b;
+  --shadow-card: 0 18px 44px rgb(0 0 0 / 22%);
+  color: var(--color-ink);
+  background: #0d1713;
+}
+
+:root[data-theme="dark"] body {
+  color: var(--color-ink);
+  background: #0d1713;
+}
+
+:root[data-theme="dark"] :is(
+  .home,
+  .login-page,
+  .register-page,
+  .dashboard-page,
+  .symptom-page,
+  .tips-page,
+  .locator-page,
+  .medicine-reminder-page,
+  .language-page,
+  .chatbot-page
+) {
+  --ink: #e5f1eb;
+  --muted: #a6bbb1;
+  --green: #55c4a0;
+  --green-dark: #55c4a0;
+  --tips-ink: #e5f1eb;
+  --tips-muted: #a6bbb1;
+  --tips-green: #55c4a0;
+  --tips-green-dark: #55c4a0;
+  color: #e5f1eb;
+  background: #0d1713;
+}
+
+:root[data-theme="dark"] :is(
+  .home-hero,
+  .home-about,
+  .dashboard-header,
+  .login-card,
+  .register-card,
+  .dashboard-card,
+  .dashboard-panel,
+  .app-sidebar,
+  .tips-header,
+  .tip-card,
+  .medicine-reminder-header,
+  .medicine-reminder-form-card,
+  .medicine-reminder-list-section,
+  .medicine-reminder-item,
+  .symptom-card,
+  .symptom-choice,
+  .locator-header,
+  .locator-search,
+  .locator-card,
+  .language-card,
+  .language-option,
+  .home-highlight,
+  .home-feature-card
+) {
+  border-color: #30483f;
+  background: #172722;
+  color: #e5f1eb;
+}
+
+:root[data-theme="dark"] :is(
+  .home-hero,
+  .home-about,
+  .login-page,
+  .register-page,
+  .symptom-page,
+  .tips-hero,
+  .medicine-reminder-hero,
+  .locator-hero,
+  .language-page
+) {
+  background: #101e19;
+}
+
+:root[data-theme="dark"] :is(
+  .site-header,
+  .dashboard-header,
+  .app-sidebar,
+  .tips-header,
+  .medicine-reminder-header,
+  .locator-header,
+  .dashboard-footer
+) {
+  border-color: #30483f;
+  background: #121f1a;
+}
+
+:root[data-theme="dark"] :is(
+  .site-brand,
+  .site-nav-link,
+  .site-login-link,
+  .dashboard-brand,
+  .dashboard-nav a,
+  .home-feature-card,
+  .login-brand,
+  .register-brand,
+  .symptom-brand,
+  .tips-brand,
+  .medicine-reminder-brand,
+  .locator-brand,
+  .language-brand,
+  .tip-card h2,
+  .locator-card-info h2,
+  .language-card h1,
+  .symptom-choice,
+  .login-card input,
+  .register-card input,
+  .medicine-reminder-form-card input,
+  .medicine-reminder-form-card textarea,
+  .symptom-card select,
+  .locator-search-row input
+) {
+  color: #e5f1eb;
+}
+
+:root[data-theme="dark"] :is(
+  .site-nav-link,
+  .site-login-link,
+  .login-card input[type="email"],
+  .login-password-wrap input,
+  .register-card input[type="text"],
+  .register-card input[type="email"],
+  .register-card input[type="password"],
+  .medicine-reminder-form-card input,
+  .medicine-reminder-form-card textarea,
+  .symptom-card select,
+  .locator-search-row input
+) {
+  border-color: #3a554a;
+  background: #10201a;
+}
+
+:root[data-theme="dark"] :is(
+  .home-intro,
+  .home-section-heading > p:last-child,
+  .home-feature-card p,
+  .home-about p,
+  .home-highlight p,
+  .dashboard-welcome p:not(.dashboard-eyebrow),
+  .dashboard-card p,
+  .dashboard-panel p:not(.dashboard-eyebrow),
+  .login-subtitle,
+  .login-register,
+  .login-note,
+  .register-subtitle,
+  .register-login,
+  .register-note,
+  .symptom-intro,
+  .tips-hero > p:last-child,
+  .tip-card p,
+  .medicine-reminder-hero > p:last-child,
+  .medicine-reminder-form-card > p,
+  .medicine-reminder-details p,
+  .locator-hero > p:last-child,
+  .locator-card-info p,
+  .language-subtitle,
+  .language-names span
+) {
+  color: #a6bbb1;
+}
+
+:root[data-theme="dark"] :is(
+  .home-feature-card:hover,
+  .dashboard-card:hover,
+  .dashboard-panel-link:hover,
+  .tip-card:hover,
+  .locator-card:hover
+) {
+  border-color: #477361;
+  box-shadow: 0 14px 34px rgb(0 0 0 / 25%);
+}
+
+:root[data-theme="dark"] :is(
+  .app-sidebar-link,
+  .dashboard-profile-link,
+  .tips-dashboard-link,
+  .locator-dashboard-link,
+  .language-option
+) {
+  color: #d7e9df;
+}
+
+:root[data-theme="dark"] .app-sidebar-link.active,
+:root[data-theme="dark"] .app-sidebar-link:hover,
+:root[data-theme="dark"] .language-option.selected,
+:root[data-theme="dark"] .symptom-choice:has(input:checked) {
+  background: #203a30;
+}
+
+:root[data-theme="dark"] :is(
+  .dashboard-notice,
+  .symptom-result,
+  .login-message,
+  .register-message,
+  .medicine-reminder-message,
+  .language-message
+) {
+  border-color: #345d4a;
+  color: #b9ead3;
+  background: #193329;
+}
+
+:root[data-theme="dark"] :is(.login-note, .register-note, .language-note) {
+  border-color: #30483f;
+}
+
+:root[data-theme="dark"] .tips-footer {
+  border-color: #30483f;
+  color: #a6bbb1;
+  background: #121f1a;
+}
+
+:root[data-theme="dark"] .site-header-promise {
+  border-color: #315347;
+  color: #c4d9cf;
+  background: #182c24;
+}
+
+:root[data-theme="dark"] .site-navigation {
+  border-color: #263e34;
+  background: #101e19;
+}
+
+:root[data-theme="dark"] .site-menu-toggle {
+  border-color: #315347;
+  background: #172722;
+}
+
+:root[data-theme="dark"] .site-menu-toggle span {
+  background: #d7e9df;
+}
+
+:root[data-theme="dark"] .site-nav-link {
+  color: #a8c0b4;
+}
+
+:root[data-theme="dark"] .site-nav-link:hover,
+:root[data-theme="dark"] .site-nav-link.active {
+  color: #5fe09b;
+  background: #1b3a2b;
+}
+
+:root[data-theme="dark"] .home-feature-visual {
+  background: linear-gradient(145deg, #1c3b2c, #193126);
+}
+
+:root[data-theme="dark"] .home-features {
+  background: #0d1713;
+}
+
+:root[data-theme="dark"] .home-feature-icon,
+:root[data-theme="dark"] .home-about-icon {
+  color: #58d58d;
+  background: #244a34;
+}
+
+:root[data-theme="dark"] .home-highlight-orbit {
+  border-color: #315d48;
+  background: radial-gradient(circle at center, #234b35 0, #19372a 50%, #172722 78%);
+}
+
+:root[data-theme="dark"] .home-button-secondary {
+  border-color: #477361;
+  color: #d7e9df;
+  background: #172722;
+}
+
+:root[data-theme="dark"] .tips-note,
+:root[data-theme="dark"] .symptom-warning,
+:root[data-theme="dark"] .locator-message,
+:root[data-theme="dark"] .locator-warning,
+:root[data-theme="dark"] .medicine-reminder-disclaimer {
+  border-color: #66572e;
+  color: #f0dca6;
+  background: #302a1b;
+}
+
+:root[data-theme="dark"] .medicine-reminder-delete {
+  border-color: #704444;
+  color: #ffb4aa;
+  background: #2b1d1d;
+}
+
+:root[data-theme="dark"] .site-nav-link.active::after {
+  background: #55c4a0;
+}
+
+:root[data-theme="dark"] :is(
+  .chatbot-header,
+  .chatbot-panel
+) {
+  border-color: #30483f;
+  background: #172722;
+}
+
+:root[data-theme="dark"] .chatbot-status {
+  border-color: #30483f;
+  color: #c4d9cf;
+}
+
+:root[data-theme="dark"] .chatbot-messages {
+  background: #101e19;
+}
+
+:root[data-theme="dark"] .chatbot-message p {
+  border-color: #30483f;
+  color: #d8e8df;
+  background: #20352d;
+}
+
+:root[data-theme="dark"] .chatbot-message.user p {
+  color: #fff;
+  background: #147d64;
+}
+
+:root[data-theme="dark"] :is(
+  .chatbot-back-link,
+  .chatbot-suggestions button,
+  .chatbot-form input,
+  .dashboard-profile-link,
+  .tips-dashboard-link,
+  .locator-dashboard-link
+) {
+  border-color: #3a554a;
+  color: #d7e9df;
+  background: #10201a;
+}
+
+:root[data-theme="dark"] .chatbot-form {
+  border-color: #30483f;
+}
+
+:root[data-theme="dark"] :is(input, textarea, select)::placeholder {
+  color: #91a79b;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

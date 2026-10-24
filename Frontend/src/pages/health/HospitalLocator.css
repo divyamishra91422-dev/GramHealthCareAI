@@ -1,0 +1,42 @@
+.locator-page { --green:#147d64; --green-dark:#0e604d; --ink:#18332e; --muted:#647873; min-height:100vh; color:var(--ink); background:#f6faf8; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+.locator-header { min-height:72px; padding:0 clamp(20px,7vw,100px); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #e3ece7; background:#fff; }
+.locator-brand { display:inline-flex; align-items:center; gap:10px; color:var(--ink); font-weight:750; text-decoration:none; }
+.locator-brand-icon { display:grid; width:36px; height:36px; place-items:center; border-radius:11px; color:#fff; background:linear-gradient(145deg,#18866d,#0e604d); }
+.locator-dashboard-link { padding:9px 13px; border:1px solid #dce8e2; border-radius:9px; color:var(--green-dark); font-size:.9rem; font-weight:700; text-decoration:none; }
+.locator-dashboard-link:hover { background:#eff7f3; }
+.locator-hero { padding:48px 8% 42px; background:radial-gradient(ellipse at 50% 0,#dff1e8 0,transparent 72%),#f0f8f4; text-align:center; }
+.locator-eyebrow { margin:0 0 9px; color:var(--green); font-size:.75rem; font-weight:800; letter-spacing:.13em; }
+.locator-hero h1 { margin:0; color:var(--ink); font-size:clamp(2rem,4.5vw,3rem); letter-spacing:-.04em; }
+.locator-hero>p:last-child { max-width:620px; margin:12px auto 0; color:var(--muted); line-height:1.65; }
+.locator-content { width:min(900px,90%); margin:30px auto 55px; }
+.locator-search { padding:22px; border:1px solid #e0eae5; border-radius:17px; background:#fff; box-shadow:0 14px 38px #18332e0d; }
+.locator-search label { display:block; margin-bottom:9px; color:var(--ink); font-size:.94rem; font-weight:750; }
+.locator-search-row { display:flex; gap:10px; }
+.locator-search-row input { min-width:0; min-height:49px; flex:1; padding:0 14px; border:1px solid #cbdad2; border-radius:10px; color:var(--ink); background:#fff; font:inherit; }
+.locator-search-row input:focus { outline:3px solid #147d641b; border-color:var(--green); }
+.locator-search-row button { min-width:104px; border:0; border-radius:10px; color:#fff; background:var(--green); cursor:pointer; font:inherit; font-weight:750; transition:background .15s ease; }
+.locator-search-row button:hover { background:var(--green-dark); }
+.locator-current-location { display:inline-flex; align-items:center; gap:8px; min-height:42px; margin-top:13px; padding:0 13px; border:1px solid #b9d8ca; border-radius:10px; color:var(--green-dark); background:#f2faf5; cursor:pointer; font:inherit; font-size:.9rem; font-weight:700; transition:background .15s ease,border-color .15s ease; }
+.locator-current-location:hover { border-color:var(--green); background:#e7f5ed; }
+.locator-current-location:disabled { cursor:wait; opacity:.65; }
+.locator-location-note { margin:10px 0 0; color:var(--muted); font-size:.82rem; }
+.locator-message { margin:16px 0; padding:13px 15px; border:1px solid #f0dfb5; border-radius:10px; color:#694f15; background:#fff9e9; font-size:.9rem; line-height:1.55; }
+.locator-results-heading { margin:27px 0 12px; color:var(--ink); font-size:1.18rem; }
+.locator-results { display:grid; gap:12px; margin-top:20px; }
+.locator-card { display:flex; align-items:flex-start; gap:16px; padding:19px; border:1px solid #e0eae5; border-radius:14px; background:#fff; box-shadow:0 7px 20px #18332e08; transition:transform .16s ease,box-shadow .16s ease; }
+.locator-card:hover { transform:translateY(-2px); box-shadow:0 12px 26px #18332e10; }
+.locator-card-icon { display:grid; width:48px; height:48px; flex:0 0 48px; place-items:center; border-radius:14px; background:#eaf6ef; font-size:1.4rem; }
+.locator-card-info h2 { margin:3px 0 8px; color:var(--ink); font-size:1.12rem; }
+.locator-card-info p { margin:5px 0; color:var(--muted); font-size:.91rem; line-height:1.5; }
+.locator-card-info .locator-type { color:var(--green-dark); font-size:.78rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+.locator-public-badge { display:inline-block; margin:0 0 5px; padding:4px 8px; border:1px solid #c5e5d3; border-radius:999px; color:#276c56; background:#edf7f1; font-size:.76rem; font-weight:700; }
+.locator-card-links { display:flex; flex-wrap:wrap; gap:16px; margin-top:9px; }
+.locator-card-links a { color:var(--green-dark); font-size:.88rem; font-weight:700; text-underline-offset:3px; }
+.locator-card-links a:hover { color:var(--green); }
+.locator-distance { display:inline-block; margin-top:6px; padding:5px 9px; border-radius:20px; color:#49685b; background:#f0f6f2; font-size:.78rem; }
+.locator-warning { margin-top:20px; padding:15px 17px; border:1px solid #f0dfb5; border-radius:11px; color:#694f15; background:#fff9e9; font-size:.88rem; line-height:1.55; }
+@media(max-width:560px) { .locator-header { min-height:64px; padding:0 5%; } .locator-hero { padding:38px 6%; } .locator-content { width:92%; margin-top:20px; } .locator-search { padding:17px; } .locator-search-row { flex-direction:column; } .locator-search-row button { min-height:46px; } .locator-card { gap:12px; padding:15px; } }
+:root[data-theme="dark"] .locator-current-location { border-color:#3a554a; color:#b9ead3; background:#193329; }
+:root[data-theme="dark"] .locator-current-location:hover { background:#203a30; }
+:root[data-theme="dark"] .locator-public-badge { border-color:#365848; color:#b9ead3; background:#193329; }
+:root[data-theme="dark"] .locator-card-links a { color:#77d7b5; }

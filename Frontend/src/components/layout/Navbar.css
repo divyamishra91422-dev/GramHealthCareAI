@@ -1,0 +1,249 @@
+.site-header {
+  position: relative;
+  z-index: 20;
+  color: #18332e;
+  background: rgb(255 255 255 / 96%);
+  border-bottom: 1px solid #dce9e2;
+  font-family: inherit;
+}
+
+.site-header-main {
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 clamp(20px, 6vw, 88px);
+}
+
+.site-brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 11px;
+  color: #18332e;
+  font-size: 1.05rem;
+  font-weight: 750;
+  text-decoration: none;
+  letter-spacing: -.02em;
+}
+
+.site-brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 14px;
+  color: white;
+  background: linear-gradient(145deg, #20b46b, #0e7658);
+  box-shadow: 0 6px 16px rgb(20 125 100 / 24%);
+}
+
+.site-header-promise {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 14px;
+  border: 1px solid #dce9e2;
+  border-radius: 999px;
+  color: #58756a;
+  background: #f4f9f6;
+  font-size: .88rem;
+  font-weight: 650;
+}
+
+.site-header-promise svg {
+  color: #16a765;
+}
+
+.site-header-tools {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.site-header-tools .theme-toggle {
+  min-height: 40px;
+  padding: 0 12px;
+  box-shadow: none;
+  font-size: .86rem;
+}
+
+.site-login-link {
+  color: #38594c;
+  font-size: .91rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.site-login-link:hover {
+  color: #0e745b;
+}
+
+.site-signup-link {
+  padding: 11px 17px;
+  border: 1px solid #16995e;
+  border-radius: 10px;
+  color: #fff;
+  background: #16a765;
+  box-shadow: 0 5px 12px rgb(22 167 101 / 18%);
+  font-size: .9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.site-signup-link:hover {
+  transform: translateY(-1px);
+  background: #108653;
+}
+
+.site-menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  border: 1px solid #dce8e2;
+  border-radius: 11px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.site-menu-toggle span {
+  display: block;
+  height: 2px;
+  margin: 5px 0;
+  border-radius: 2px;
+  background: #18332e;
+}
+
+.site-navigation {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.5vw, 22px);
+  padding: 0 clamp(16px, 4vw, 56px);
+  border-top: 1px solid #e7eee9;
+  background: #f8fbf9;
+}
+
+.site-nav-link {
+  position: relative;
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 11px;
+  border-radius: 999px;
+  color: #577168;
+  font-size: .86rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .18s ease, background .18s ease;
+}
+
+.site-nav-link:hover,
+.site-nav-link.active {
+  color: #0d754d;
+  background: #e8f6ee;
+}
+
+.site-nav-link.active {
+  font-weight: 750;
+}
+
+@media (max-width: 1100px) {
+  .site-header-promise {
+    display: none;
+  }
+
+  .site-navigation {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header-main {
+    min-height: 68px;
+    gap: 12px;
+    padding: 10px 5%;
+  }
+
+  .site-brand {
+    margin-right: auto;
+    font-size: .98rem;
+  }
+
+  .site-brand-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .site-header-tools {
+    gap: 8px;
+  }
+
+  .site-header-tools .theme-toggle {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    min-height: 42px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .site-header-tools .theme-toggle span {
+    display: none;
+  }
+
+  .site-header-tools .site-login-link {
+    display: none;
+  }
+
+  .site-header-tools .site-signup-link {
+    padding: 10px 12px;
+    font-size: .83rem;
+  }
+
+  .site-menu-toggle {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .site-navigation {
+    display: none;
+    max-height: 55vh;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    padding: 10px 5% 14px;
+  }
+
+  .site-navigation.is-open {
+    display: flex;
+  }
+
+  .site-nav-link {
+    min-height: 43px;
+    padding: 0 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-brand > span:last-child {
+    max-width: 132px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-header-tools .site-signup-link {
+    display: none;
+  }
+}

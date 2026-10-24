@@ -1,0 +1,201 @@
+GRAMHEALTHCAREAI - MYSQL WORKBENCH QUERIES
+==========================================
+
+Use these queries in MySQL Workbench. Select the gramhealthcareai schema first,
+or run this statement before the queries:
+
+USE gramhealthcareai;
+
+
+1. AUTHENTICATION MODULE (REGISTER / LOGIN / GOOGLE LOGIN)
+---------------------------------------------------------
+The users table stores account details. Passwords must be stored as hashes,
+never as plain text. password_hash is nullable because Google-only accounts
+do not have an app password.
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  password_hash VARCHAR(255) NULL,
+  google_sub VARCHAR(255) NULL,
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_users_email (email),
+  UNIQUE KEY uq_users_google_sub (google_sub)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+Check its columns:
+DESCRIBE users;
+
+Check registered accounts (does not display password hashes):
+SELECT id, name, email, google_sub, created_at FROM users ORDER BY id DESC;
+
+If users already existed before Google sign-in was added, inspect it first:
+DESCRIBE users;
+
+Only if password_hash is NOT NULL, make it nullable for Google-only accounts:
+ALTER TABLE users MODIFY COLUMN password_hash VARCHAR(255) NULL;
+
+Only if google_sub is missing, add it:
+ALTER TABLE users ADD COLUMN google_sub VARCHAR(255) NULL;
+
+Only if there is no unique index on google_sub, add one:
+CREATE UNIQUE INDEX uq_users_google_sub ON users (google_sub);
+
+Do not run the conditional ALTER/CREATE INDEX statements if those columns or
+indexes already exist; MySQL will report a duplicate-column/index error.
+
+
+2. MEDICINE REMINDERS MODULE
+---------------------------
+Each reminder belongs to one user. The backend reads, inserts, and deletes rows
+from this table.
+
+CREATE TABLE IF NOT EXISTS medicine_reminders (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  medicine_name VARCHAR(150) NOT NULL,
+  dosage VARCHAR(100) NOT NULL,
+  reminder_time TIME NOT NULL,
+  notes VARCHAR(300) NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_medicine_reminders_user_time (user_id, reminder_time),
+  CONSTRAINT fk_medicine_reminders_user
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+Check columns and saved reminder rows:
+DESCRIBE medicine_reminders;
+SELECT id, user_id, medicine_name, dosage, reminder_time, notes, created_at
+FROM medicine_reminders ORDER BY id DESC;
+
+
+3. SYMPTOM CHECKER MODULE
+-------------------------
+Symptoms, including any selected urgent warning signs, are stored as JSON along with the selected duration and save time. The checker only highlights listed warning signs; it does not diagnose or rule out an emergency.
+
+CREATE TABLE IF NOT EXISTS symptom_checks (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  symptoms JSON NOT NULL,
+  duration ENUM('today', 'few-days', 'week', 'longer') NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_symptom_checks_user_created (user_id, created_at),
+  CONSTRAINT fk_symptom_checks_user
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+Check columns and saved symptom checks:
+DESCRIBE symptom_checks;
+SELECT id, user_id, symptoms, duration, created_at
+FROM symptom_checks ORDER BY id DESC;
+
+If the existing timestamp column is still named consented_at, run this once
+to match the backend's created_at query. Do not run if created_at already exists:
+ALTER TABLE symptom_checks
+  CHANGE COLUMN consented_at created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+
+4. LANGUAGE PREFERENCE MODULE
+-----------------------------
+One saved language preference per user; the backend supports en, hi, bn, ta,
+te, and mr.
+
+CREATE TABLE IF NOT EXISTS user_preferences (
+  user_id INT NOT NULL,
+  language_code CHAR(2) NOT NULL DEFAULT 'en',
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (user_id),
+  CONSTRAINT fk_user_preferences_user
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+Check columns and saved preferences:
+DESCRIBE user_preferences;
+SELECT user_id, language_code, updated_at
+FROM user_preferences ORDER BY user_id;
+
+
+5. HEALTH CHATBOT
+-----------------
+Each conversation belongs to one user. Conversation messages are saved in
+MySQL so users can reopen and continue their own chats.
+Voice dictation and spoken replies use browser speech features. For image questions,
+set GROQ_VISION_MODEL if needed (default: qwen/qwen3.8-27b); image bytes are sent
+to Groq for the response but are not stored in MySQL. A text marker is saved in
+the conversation history instead. Image-based responses are informational only
+and must not diagnose or recommend treatment.
+
+CREATE TABLE IF NOT EXISTS chat_conversations (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  title VARCHAR(120) NOT NULL DEFAULT 'New chat',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_chat_conversations_user_updated (user_id, updated_at),
+  CONSTRAINT fk_chat_conversations_user
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS chat_messages (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  conversation_id INT NOT NULL,
+  sender ENUM('user', 'assistant') NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_chat_messages_conversation (conversation_id, id),
+  CONSTRAINT fk_chat_messages_conversation
+    FOREIGN KEY (conversation_id) REFERENCES chat_conversations(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+Check chatbot tables and saved conversation/message rows:
+DESCRIBE chat_conversations;
+DESCRIBE chat_messages;
+SELECT id, user_id, title, created_at, updated_at
+FROM chat_conversations ORDER BY updated_at DESC;
+SELECT id, conversation_id, sender, content, created_at
+FROM chat_messages ORDER BY id DESC;
+
+
+6. GENERAL CHECKS
+-----------------
+Show all tables in the selected database:
+SHOW TABLES;
+
+Check that MySQL is reachable from the backend (run in the app's browser):
+GET http://localhost:5000/api/health
+
+
+MODULES THAT CURRENTLY DO NOT STORE DATA IN MYSQL
+=================================================
+Health Tips: fixed public list in Backend/src/routes/healthTipsRoutes.js.
+Hospital Locator: searches OpenStreetMap and uses a temporary in-memory cache.
+These modules do not require SQL tables unless you decide to add saved/favorite
+features or database-managed content later.
+
+
+PASSWORD RECOVERY
+=================
+Password recovery is not part of this project. The backend does not expose
+forgot-password or reset-password routes, and the database does not need a
+password_reset_tokens table. Users can sign in with Google or use their
+registered email and password.
+
+
+NOTES
+=====
+CREATE TABLE IF NOT EXISTS does not modify a table that already exists. If a
+table exists but has different columns, run DESCRIBE <table_name> first and
+apply only the matching migration query above. Do not drop tables that contain
+data you want to keep.
+
+The app inserts and deletes user data through its authenticated backend routes.
+Use the SELECT queries here to confirm whether rows were saved. Do not manually
+insert passwords into users; registration hashes passwords in the backend.

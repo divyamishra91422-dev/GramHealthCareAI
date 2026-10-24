@@ -1,0 +1,236 @@
+.symptom-page {
+  --green: #147d64;
+  --green-dark: #0e604d;
+  --ink: #18332e;
+  --muted: #647873;
+
+  min-height: 100vh;
+  padding: 28px 7%;
+  color: var(--ink);
+  background: linear-gradient(135deg, #f1f8f5, #fbfdfc);
+  font-family: inherit;
+}
+
+.symptom-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.symptom-brand-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--green);
+  font-size: 1.25rem;
+}
+
+.symptom-card {
+  width: min(100%, 720px);
+  margin: 42px auto;
+  padding: 36px;
+  border: 1px solid #e3ece8;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgb(24 51 46 / 8%);
+}
+
+.symptom-eyebrow {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.symptom-card h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.symptom-intro {
+  margin: 10px 0 26px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.symptom-list {
+  padding: 0;
+  border: 0;
+}
+
+.symptom-warning-list {
+  margin-top: 24px;
+}
+
+.symptom-list legend,
+.symptom-duration-label {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.symptom-choice {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #dce7e2;
+  border-radius: 9px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.symptom-choice:has(input:checked) {
+  border-color: var(--green);
+  background: #f0f8f4;
+}
+
+.symptom-choice input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--green);
+}
+
+.symptom-warning-hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.symptom-urgent-alert {
+  margin-top: 18px;
+  padding: 15px;
+  border: 1px solid #e2a2a2;
+  border-radius: 9px;
+  color: #762c2c;
+  background: #fff0f0;
+  line-height: 1.55;
+}
+
+.symptom-duration-label {
+  display: block;
+  margin-top: 24px;
+}
+
+.symptom-card select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 1px solid #cfdcd7;
+  border-radius: 9px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+}
+
+.symptom-card select:focus {
+  outline: 3px solid rgb(20 125 100 / 15%);
+  border-color: var(--green);
+}
+
+.symptom-submit {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 9px;
+  color: #fff;
+  background: var(--green);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.symptom-submit:hover {
+  background: var(--green-dark);
+}
+
+.symptom-result {
+  padding: 14px;
+  border-radius: 9px;
+  color: var(--green-dark);
+  background: #edf7f2;
+  line-height: 1.55;
+}
+
+.symptom-next-steps {
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid #c8e4d6;
+  border-radius: 12px;
+  color: var(--ink);
+  background: #f1faf5;
+  line-height: 1.6;
+}
+
+.symptom-next-steps h2 {
+  margin: 0 0 10px;
+  color: var(--green-dark);
+  font-size: 1.12rem;
+}
+
+.symptom-next-steps p {
+  margin: 9px 0 0;
+}
+
+.symptom-next-steps-record {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+:root[data-theme="dark"] .symptom-next-steps {
+  border-color: #345849;
+  color: #e5f1eb;
+  background: #172b22;
+}
+
+:root[data-theme="dark"] .symptom-next-steps h2 {
+  color: #9de4c5;
+}
+
+:root[data-theme="dark"] .symptom-urgent-alert {
+  border-color: #8b4a4a;
+  color: #ffd6d6;
+  background: #351f1f;
+}
+
+.symptom-warning {
+  margin-top: 22px;
+  padding: 15px;
+  border: 1px solid #f0dfb5;
+  border-radius: 9px;
+  color: #694f15;
+  background: #fff9e9;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 560px) {
+  .symptom-page {
+    padding: 20px 5%;
+  }
+
+  .symptom-card {
+    margin-top: 30px;
+    padding: 25px 20px;
+  }
+
+  .symptom-grid {
+    grid-template-columns: 1fr;
+  }
+}
